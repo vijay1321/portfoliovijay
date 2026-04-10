@@ -67,7 +67,7 @@ export default function Studies() {
     <section id="academic" className="py-24 md:py-32 px-6 md:px-20 bg-surface/30 backdrop-blur-3xl border-t border-white/5 overflow-hidden relative">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 md:gap-20">
         
-        <div className="lg:w-1/3 sticky top-32 h-fit text-left">
+        <div className="lg:w-1/3 relative lg:sticky lg:top-32 h-fit text-left">
           <span className="font-sans text-[10px] md:text-xs text-accent uppercase tracking-[0.4em] font-black border border-accent/20 px-4 py-2 rounded-full mb-6 md:mb-8 inline-block">Career Path</span>
           <h2 className="text-5xl sm:text-6xl md:text-7xl font-display font-medium uppercase tracking-tighter text-white leading-tight md:leading-none">Education <br className="hidden md:block" />& <br className="hidden md:block" /><span className="text-accent underline decoration-white/10">Experience</span></h2>
         </div>

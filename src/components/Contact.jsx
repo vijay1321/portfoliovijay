@@ -69,7 +69,7 @@ ${message}`;
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 md:gap-24 items-start">
         
         {/* Left: Info */}
-        <div className="flex flex-col gap-10 md:gap-14 sticky top-32 text-left">
+        <div className="flex flex-col gap-10 md:gap-14 relative lg:sticky lg:top-32 text-left">
           <div className="overflow-hidden">
             <motion.span 
               initial={{ y: 20, opacity: 0 }}
