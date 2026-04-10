@@ -38,30 +38,38 @@ const contactInfo = [
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     const formData = new FormData(e.target);
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const subject = formData.get('subject') || 'Contact from Portfolio';
-    const message = formData.get('message');
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      subject: formData.get('subject') || 'Contact from Portfolio',
+      message: formData.get('message'),
+      _captcha: 'false', // Optional: disable captcha for smoother UX
+      _template: 'box' // Optional: use a nicer email template
+    };
 
-    const body = `Name: ${name}
-Email: ${email}
+    try {
+      await fetch("https://formsubmit.co/ajax/vrvijay2005@gmail.com", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
 
-Message:
-${message}`;
-
-    const mailtoLink = `mailto:vrvijay2005@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
-    window.location.href = mailtoLink;
-
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      e.target.reset();
-    }, 4000);
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        e.target.reset();
+      }, 4000);
+    } catch (error) {
+      console.error(error);
+      alert("Failed to send message. Please try again later.");
+    }
   };
 
   return (
