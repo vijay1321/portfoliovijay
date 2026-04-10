@@ -37,6 +37,22 @@ const contactInfo = [
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const handleSubmit = (e) => {
+    // We let the form submit naturally to the hidden iframe
+    // so we don't preventDefault() completely, just update UI
+    setSubmitted(true);
+    
+    // Clear the form fields after a short delay so the submittal has time to gather data
+    setTimeout(() => {
+      e.target.reset();
+    }, 500);
+
+    // Reset the button back to normal after 4 seconds
+    setTimeout(() => {
+      setSubmitted(false);
+    }, 4000);
+  };
+
   return (
     <section id="contact" className="py-24 md:py-32 px-6 md:px-20 bg-gradient-to-b from-background to-[#0d0d0d] relative overflow-hidden">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 md:gap-24 items-start">
@@ -107,8 +123,13 @@ export default function Contact() {
           transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
           className="w-full pt-10 lg:pt-0"
         >
-          <form action="https://formsubmit.co/vrvijay2005@gmail.com" method="POST" className="flex flex-col gap-10 md:gap-12 text-left">
+          {/* Hidden iframe to silently capture FormSubmit's redirect page without changing user's page */}
+          <iframe name="hidden_iframe" id="hidden_iframe" style={{ display: 'none' }}></iframe>
+          
+          <form action="https://formsubmit.co/vrvijay2005@gmail.com" method="POST" target="hidden_iframe" onSubmit={handleSubmit} className="flex flex-col gap-10 md:gap-12 text-left">
             <input type="hidden" name="_template" value="box" />
+            {/* Optional: you can re-enable captcha by removing the following line. Leaving it disabled for smooth UX */}
+            <input type="hidden" name="_captcha" value="false" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
               <div className="flex flex-col gap-4">
                 <label htmlFor="name" className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/30 font-sans font-black">Name</label>
