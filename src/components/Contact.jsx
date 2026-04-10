@@ -37,41 +37,6 @@ const contactInfo = [
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    const formData = new FormData(e.target);
-    const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      subject: formData.get('subject') || 'Contact from Portfolio',
-      message: formData.get('message'),
-      _captcha: 'false', // Optional: disable captcha for smoother UX
-      _template: 'box' // Optional: use a nicer email template
-    };
-
-    try {
-      await fetch("https://formsubmit.co/ajax/vrvijay2005@gmail.com", {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
-
-      setSubmitted(true);
-      setTimeout(() => {
-        setSubmitted(false);
-        e.target.reset();
-      }, 4000);
-    } catch (error) {
-      console.error(error);
-      alert("Failed to send message. Please try again later.");
-    }
-  };
-
   return (
     <section id="contact" className="py-24 md:py-32 px-6 md:px-20 bg-gradient-to-b from-background to-[#0d0d0d] relative overflow-hidden">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 md:gap-24 items-start">
@@ -142,7 +107,8 @@ export default function Contact() {
           transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
           className="w-full pt-10 lg:pt-0"
         >
-          <form onSubmit={handleSubmit} className="flex flex-col gap-10 md:gap-12 text-left">
+          <form action="https://formsubmit.co/vrvijay2005@gmail.com" method="POST" className="flex flex-col gap-10 md:gap-12 text-left">
+            <input type="hidden" name="_template" value="box" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
               <div className="flex flex-col gap-4">
                 <label htmlFor="name" className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/30 font-sans font-black">Name</label>
