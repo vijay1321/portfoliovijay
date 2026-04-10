@@ -132,49 +132,49 @@ export default function Contact() {
             <input type="hidden" name="subject" value="New Submission from Portfolio" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
               <div className="flex flex-col gap-4">
-                <label htmlFor="name" className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/30 font-sans font-black">Name</label>
+                <label htmlFor="name" className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/60 font-sans font-black">Name</label>
                 <input 
                   id="name"
                   name="name"
                   type="text" 
                   placeholder="Your Name" 
                   required
-                  className="bg-transparent border-b border-white/10 py-4 md:py-5 font-sans text-white focus:border-accent outline-none transition-all placeholder:text-white/10 text-base md:text-xl font-light"
+                  className="bg-transparent border-b border-white/30 py-4 md:py-5 font-sans text-white focus:border-accent outline-none transition-all placeholder:text-white/40 text-base md:text-xl font-light"
                 />
               </div>
               <div className="flex flex-col gap-4">
-                <label htmlFor="email" className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/30 font-sans font-black">Email</label>
+                <label htmlFor="email" className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/60 font-sans font-black">Email</label>
                 <input 
                   id="email"
                   name="email"
                   type="email" 
                   placeholder="hello@example.com" 
                   required
-                  className="bg-transparent border-b border-white/10 py-4 md:py-5 font-sans text-white focus:border-accent outline-none transition-all placeholder:text-white/10 text-base md:text-xl font-light"
+                  className="bg-transparent border-b border-white/30 py-4 md:py-5 font-sans text-white focus:border-accent outline-none transition-all placeholder:text-white/40 text-base md:text-xl font-light"
                 />
               </div>
             </div>
 
             <div className="flex flex-col gap-4">
-              <label htmlFor="subject" className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/30 font-sans font-black">Subject</label>
+              <label htmlFor="subject" className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/60 font-sans font-black">Subject</label>
               <input 
                 id="subject"
                 name="subject"
                 type="text" 
                 placeholder="Internship Opportunity / Collaboration..." 
-                className="bg-transparent border-b border-white/10 py-4 md:py-5 font-sans text-white focus:border-accent outline-none transition-all placeholder:text-white/10 text-base md:text-xl font-light"
+                className="bg-transparent border-b border-white/30 py-4 md:py-5 font-sans text-white focus:border-accent outline-none transition-all placeholder:text-white/40 text-base md:text-xl font-light"
               />
             </div>
             
             <div className="flex flex-col gap-4">
-              <label htmlFor="message" className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/30 font-sans font-black">Message</label>
+              <label htmlFor="message" className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/60 font-sans font-black">Message</label>
               <textarea 
                 id="message"
                 name="message"
                 rows="1" 
                 placeholder="Let's build something great together..." 
                 required
-                className="bg-transparent border-b border-white/10 py-4 md:py-5 font-sans text-white focus:border-accent outline-none transition-all placeholder:text-white/10 text-base md:text-xl font-light resize-none overflow-hidden"
+                className="bg-transparent border-b border-white/30 py-4 md:py-5 font-sans text-white focus:border-accent outline-none transition-all placeholder:text-white/40 text-base md:text-xl font-light resize-none overflow-hidden"
                 onInput={(e) => {
                   e.target.style.height = 'auto';
                   e.target.style.height = e.target.scrollHeight + 'px';
