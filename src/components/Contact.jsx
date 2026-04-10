@@ -129,7 +129,6 @@ export default function Contact() {
           <form action="https://api.web3forms.com/submit" method="POST" target="hidden_iframe" onSubmit={handleSubmit} className="flex flex-col gap-10 md:gap-12 text-left">
             {/* Get your free access key from https://web3forms.com/ by entering your email */}
             <input type="hidden" name="access_key" value="0e37f649-0a3c-49f5-9a06-32617056085b" />
-            <input type="hidden" name="subject" value="New Submission from Portfolio" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
               <div className="flex flex-col gap-4">
                 <label htmlFor="name" className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/60 font-sans font-black">Name</label>
