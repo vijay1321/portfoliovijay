@@ -40,8 +40,28 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    const formData = new FormData(e.target);
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const subject = formData.get('subject') || 'Contact from Portfolio';
+    const message = formData.get('message');
+
+    const body = `Name: ${name}
+Email: ${email}
+
+Message:
+${message}`;
+
+    const mailtoLink = `mailto:vrvijay2005@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    window.location.href = mailtoLink;
+
     setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+    setTimeout(() => {
+      setSubmitted(false);
+      e.target.reset();
+    }, 4000);
   };
 
   return (
