@@ -25,7 +25,7 @@ export default function Footer() {
     { 
       name: 'Instagram', 
       icon: <Instagram className="w-6 h-6 md:w-7 md:h-7" />, 
-      href: 'https://instagram.com' 
+      href: 'https://www.instagram.com/_mr.vijay_143_?igsh=MTNleHFwdzV4bDB3cw==' 
     },
   ];
 
