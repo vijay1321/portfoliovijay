@@ -30,6 +30,8 @@ How Resume Filtering Works: The system tokenizes both the resume text and job re
     role: 'NLP / Chatbot / AI',
     tag: 'Hackathon Project',
     image: campusMentorImg,
+    live: 'https://vijay1321.github.io/Sasurie-Mentor-AI-/',
+    github: 'https://github.com/vijay1321/Sasurie-Mentor-AI-',
     shortDesc: 'AI chatbot system connecting students with mentors and providing campus guidance.',
     description: `Campus Mentor AI is an intelligent chatbot system designed to help students navigate college life, find the right mentors, and get real-time guidance.
 
@@ -46,6 +48,7 @@ The project was built collaboratively during a hackathon and demonstrates how AI
     role: 'React / UI/UX / Ongoing',
     tag: 'Real Client Project',
     image: photographyStudioImg,
+    live: 'https://narenveda.vercel.app/',
     shortDesc: 'Professional photography portfolio website built for a real client using React.',
     description: `Naren Veda Photography is an ongoing real-world client project — a premium photography portfolio website designed to showcase the photographer's work and attract new clients.
 
@@ -62,6 +65,8 @@ Being a real client project, this is actively refined with client feedback — m
     role: 'JS / Framer Motion / UI',
     tag: 'UI Project',
     image: birthdayProjectImg,
+    live: 'https://vijay1321.github.io/Birthday/',
+    github: 'https://github.com/vijay1321/Birthday',
     shortDesc: 'Interactive birthday-themed web app with cinematic animations and a surprise reveal.',
     description: `Birthday Project is a creative, interactive birthday-themed web application designed as a personal gift using modern web technologies.
 
