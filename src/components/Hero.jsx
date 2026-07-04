@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download, Mail, Phone, Linkedin, Github } from 'lucide-react';
 
-import profileImg from '../assets/images/profile.png';
+import profileImg from '../assets/images/profile.jpeg';
 
 export default function Hero() {
   const containerVariants = {
@@ -49,6 +49,34 @@ export default function Hero() {
     { icon: <Linkedin className="w-4 h-4" />, label: 'LinkedIn', href: 'https://www.linkedin.com/in/vijay13072005' },
     { icon: <Github className="w-4 h-4" />, label: 'GitHub', href: 'https://github.com/vijay1321' },
   ];
+
+  const handleScrollToProjects = (e) => {
+    e.preventDefault();
+    const section = document.getElementById('projects');
+    if (!section) return;
+
+    const offset = 24;
+    const start = window.pageYOffset;
+    const end = section.getBoundingClientRect().top + start - offset;
+    const distance = end - start;
+    const duration = 500;
+    let startTime = null;
+
+    const easeInOutQuad = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
+
+    const animateScroll = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      const easedProgress = easeInOutQuad(progress);
+      window.scrollTo(0, start + distance * easedProgress);
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+
+    requestAnimationFrame(animateScroll);
+  };
 
   return (
     <section id="home" className="min-h-screen relative flex items-center justify-center px-6 md:px-20 overflow-hidden pt-32 md:pt-20">
@@ -113,6 +141,7 @@ export default function Hero() {
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row flex-wrap justify-center md:justify-start gap-4 md:gap-6 w-full px-6 md:px-0">
             <a 
               href="#projects"
+              onClick={handleScrollToProjects}
               className="group flex items-center justify-center gap-4 bg-white text-black px-12 py-5 md:px-10 rounded-full font-sans font-bold hover:bg-accent transition-all duration-500 uppercase tracking-widest text-[10px] md:text-xs"
             >
               View Projects 
@@ -134,17 +163,17 @@ export default function Hero() {
           variants={splitVariantRight}
           className="order-1 md:order-2 flex flex-col items-center justify-center mt-10 md:mt-0"
         >
-          <div className="relative w-full max-w-[320px] sm:max-w-[420px] aspect-square group mb-8">
+          <div className="relative w-full max-w-[280px] sm:max-w-[360px] aspect-square group mb-8">
             <motion.div 
-               initial={{ scale: 1.1 }}
+               initial={{ scale: 0.95 }}
                whileInView={{ scale: 1 }}
                transition={{ duration: 1.5, ease: [0.76, 0, 0.24, 1] }}
-               className="w-full h-full bg-surface overflow-hidden rounded-full border border-white/10 relative shadow-2xl"
+               className="w-full h-full overflow-hidden rounded-full border border-white/10 relative shadow-2xl bg-transparent"
             >
               <img 
                 src={profileImg} 
                 alt="Vijay R" 
-                className="w-full h-full object-cover object-top group-hover:scale-105 transition-all duration-1000 ease-in-out" 
+                className="w-full h-full object-cover object-center transition-all duration-1000 ease-in-out" 
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent"></div>
             </motion.div>

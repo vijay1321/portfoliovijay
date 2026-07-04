@@ -36,9 +36,29 @@ function App() {
     setIsMenuOpen(false);
     const id = href.replace('#', '');
     const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    if (!el) return;
+
+    const offset = 24; // account for fixed header spacing
+    const start = window.pageYOffset;
+    const end = el.getBoundingClientRect().top + start - offset;
+    const distance = end - start;
+    const duration = 500;
+    let startTime = null;
+
+    const easeInOutQuad = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
+
+    const animateScroll = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      const easedProgress = easeInOutQuad(progress);
+      window.scrollTo(0, start + distance * easedProgress);
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+
+    requestAnimationFrame(animateScroll);
   };
 
   return (
