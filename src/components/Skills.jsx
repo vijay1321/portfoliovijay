@@ -67,9 +67,9 @@ const areasOfInterest = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 md:py-32 px-6 md:px-20 bg-background border-t border-white/5 relative overflow-hidden">
+    <section id="skills" className="py-16 md:py-32 px-4 md:px-20 bg-background border-t border-white/5 relative overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-20 gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-20 gap-6">
           <div>
             <span className="font-sans text-[10px] md:text-xs text-accent uppercase tracking-[0.4em] font-black mb-4 block">What I Know</span>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-display uppercase tracking-wider text-left">Technical <br /> <span className="text-accent underline decoration-white/10 underline-offset-8">Arsenal</span></h2>
@@ -80,9 +80,9 @@ export default function Skills() {
         </div>
 
         {/* Areas of Interest */}
-        <div className="mb-16 md:mb-20">
-          <h3 className="font-sans text-[10px] uppercase tracking-[0.5em] text-white/40 font-bold mb-6">Areas of Interest</h3>
-          <div className="flex flex-wrap gap-4">
+        <div className="mb-8 md:mb-16">
+          <h3 className="font-sans text-[10px] uppercase tracking-[0.5em] text-white/40 font-bold mb-4">Areas of Interest</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
             {areasOfInterest.map((area) => (
               <motion.div
                 key={area.label}
@@ -90,17 +90,17 @@ export default function Skills() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.05 }}
-                className="flex items-center gap-3 bg-accent/10 border border-accent/20 px-6 py-3 rounded-full"
+                className="flex items-center gap-3 bg-accent/10 border border-accent/20 px-4 py-3 rounded-full"
               >
-                <span className="text-xl">{area.icon}</span>
-                <span className="font-sans font-bold text-xs md:text-sm text-accent uppercase tracking-[0.2em]">{area.label}</span>
+                <span className="text-lg">{area.icon}</span>
+                <span className="font-sans font-bold text-[10px] sm:text-xs text-accent uppercase tracking-[0.2em]">{area.label}</span>
               </motion.div>
             ))}
           </div>
         </div>
 
         {/* Skill Groups Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:grid-cols-2">
           {skillGroups.map((group, idx) => (
             <motion.div 
               key={group.category}
@@ -108,10 +108,10 @@ export default function Skills() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: idx * 0.1, duration: 1 }}
               viewport={{ once: true }}
-              className="flex flex-col gap-8 md:gap-10 bg-surface/30 p-8 md:p-10 rounded-[2rem] border border-white/5"
+              className="flex flex-col gap-3 sm:gap-4 md:gap-6 bg-surface/30 p-3 sm:p-4 md:p-10 rounded-[1.75rem] border border-white/5"
             >
-              <h3 className="text-gray-400 font-display uppercase tracking-[0.2em] text-base md:text-lg font-bold border-b border-white/10 pb-4 text-left flex items-center gap-3">
-                <span className="text-2xl">{group.emoji}</span>
+              <h3 className="text-gray-400 font-display uppercase tracking-[0.2em] text-sm md:text-lg font-bold border-b border-white/10 pb-3 text-left flex items-center gap-3">
+                <span className="text-xl">{group.emoji}</span>
                 {group.category}
               </h3>
               <div className="flex flex-col gap-6 md:gap-7">

@@ -79,7 +79,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="min-h-screen relative flex items-center justify-center px-6 md:px-20 overflow-hidden pt-32 md:pt-20">
+    <section id="home" className="min-h-screen relative flex items-start justify-center px-4 md:px-20 overflow-hidden pt-14 md:pt-20 pb-8 md:pb-0">
       
       {/* Background Decor */}
       <div className="absolute inset-0 pointer-events-none opacity-20">
@@ -96,11 +96,11 @@ export default function Hero() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="relative z-10 max-w-7xl w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center"
+        className="relative z-10 max-w-5xl w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 items-start"
       >
         
         {/* Left Side: Content */}
-        <motion.div variants={splitVariantLeft} className="order-2 md:order-1 flex flex-col items-center md:items-start text-center md:text-left">
+        <motion.div variants={splitVariantLeft} className="order-2 md:order-1 flex flex-col items-center md:items-start text-center md:text-left max-w-xl sm:max-w-2xl">
           <div className="overflow-hidden mb-6 w-full">
             <motion.h1 
               variants={itemVariants}
@@ -111,26 +111,27 @@ export default function Hero() {
             </motion.h1>
           </div>
 
-          <motion.div variants={itemVariants} className="max-w-xl mb-8 md:mb-10">
-            <p className="font-sans text-sm md:text-base text-white/50 font-light leading-relaxed mb-6 px-4 md:px-0">
-              To launch my career as a <span className="text-white font-medium">MERN Stack Developer</span> in a reputed organization that fosters continuous learning and professional growth. I aim to leverage my skills in web development to build efficient, scalable, and user-friendly applications while continuously enhancing my technical expertise.
+          <motion.div variants={itemVariants} className="max-w-lg sm:max-w-xl mb-6 md:mb-10">
+            <p className="font-sans text-sm md:text-base text-white/55 font-light leading-relaxed mb-4 px-4 md:px-0">
+              I build efficient, scalable, and user-friendly MERN web applications with clean UI and strong performance.
             </p>
-            <div className="flex justify-center md:justify-start w-full px-6 md:px-0">
-              <p className="text-xs sm:text-sm text-gray-400 font-sans leading-relaxed border-l-2 border-accent pl-6 italic mb-6 text-left">
-                "Building ideas into reality through code."
-              </p>
-            </div>
+            <p className="hidden sm:block text-xs sm:text-sm text-gray-400 font-sans leading-relaxed border-l-2 border-accent pl-6 italic mb-6 text-left">
+              "Building ideas into reality through code."
+            </p>
+            <p className="block sm:hidden text-[10px] text-gray-400 font-sans leading-relaxed italic mb-4 text-left">
+              "Building ideas into reality through code."
+            </p>
           </motion.div>
 
           {/* Quick contact links */}
-          <motion.div variants={itemVariants} className="flex flex-wrap justify-center md:justify-start gap-3 mb-8 px-4 md:px-0">
+          <motion.div variants={itemVariants} className="grid grid-cols-2 gap-2 md:flex md:flex-wrap md:gap-3 justify-items-center md:justify-start mb-5 md:mb-8 px-2 md:px-0">
             {quickLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 target={link.href.startsWith('http') ? '_blank' : undefined}
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-[10px] text-white/40 hover:text-accent transition-colors font-sans uppercase tracking-wider border border-white/10 hover:border-accent/40 px-3 py-2 rounded-full"
+                className="min-w-0 flex items-center gap-2 text-[8px] sm:text-[9px] text-white/40 hover:text-accent transition-colors font-sans uppercase tracking-wider border border-white/10 hover:border-accent/40 px-2.5 py-1.5 rounded-full truncate"
               >
                 {link.icon}
                 <span>{link.label}</span>
@@ -138,11 +139,11 @@ export default function Hero() {
             ))}
           </motion.div>
 
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row flex-wrap justify-center md:justify-start gap-4 md:gap-6 w-full px-6 md:px-0">
+          <motion.div variants={itemVariants} className="grid grid-cols-2 gap-2 sm:grid-cols-2 justify-between w-full px-2 md:px-0">
             <a 
               href="#projects"
               onClick={handleScrollToProjects}
-              className="group flex items-center justify-center gap-4 bg-white text-black px-12 py-5 md:px-10 rounded-full font-sans font-bold hover:bg-accent transition-all duration-500 uppercase tracking-widest text-[10px] md:text-xs"
+              className="group flex items-center justify-center gap-2 bg-white text-black px-3 py-3 sm:px-5 sm:py-3 md:px-10 rounded-full font-sans font-bold hover:bg-accent transition-all duration-500 uppercase tracking-widest text-[9px] md:text-xs w-full"
             >
               View Projects 
               <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-2 transition-transform duration-300" />
@@ -150,7 +151,7 @@ export default function Hero() {
             <a 
               href="/resume.pdf" 
               download="Vijay_R_Resume.pdf"
-              className="flex items-center justify-center gap-4 px-12 py-5 md:px-10 rounded-full font-sans font-bold border border-white/20 hover:bg-white/10 transition-all duration-500 backdrop-blur-sm uppercase tracking-widest text-[10px] md:text-xs text-white"
+              className="flex items-center justify-center gap-2 px-3 py-3 sm:px-5 sm:py-3 md:px-10 rounded-full font-sans font-bold border border-white/20 hover:bg-white/10 transition-all duration-500 backdrop-blur-sm uppercase tracking-widest text-[9px] md:text-xs text-white w-full"
             >
               Download Resume
               <Download className="w-3 h-3 md:w-4 md:h-4" />
@@ -161,9 +162,9 @@ export default function Hero() {
         {/* Right Side: Image Reveal */}
         <motion.div 
           variants={splitVariantRight}
-          className="order-1 md:order-2 flex flex-col items-center justify-center mt-10 md:mt-0"
+          className="order-1 md:order-2 flex flex-col items-center justify-center mt-8 md:mt-0"
         >
-          <div className="relative w-full max-w-[280px] sm:max-w-[360px] aspect-square group mb-8">
+          <div className="relative w-full max-w-[220px] sm:max-w-[280px] aspect-square group mb-6">
             <motion.div 
                initial={{ scale: 0.95 }}
                whileInView={{ scale: 1 }}
@@ -235,7 +236,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+        className="hidden sm:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-4"
       >
         <span className="text-[10px] uppercase tracking-[0.5em] text-white/30 font-sans">Scroll Down</span>
         <div className="w-[1px] h-20 bg-gradient-to-b from-accent to-transparent"></div>

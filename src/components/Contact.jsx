@@ -37,28 +37,45 @@ const contactInfo = [
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
-  const handleSubmit = (e) => {
-    // We let the form submit naturally to the hidden iframe
-    // so we don't preventDefault() completely, just update UI
-    setSubmitted(true);
-    
-    // Clear the form fields after a short delay so the submittal has time to gather data
-    setTimeout(() => {
-      e.target.reset();
-    }, 500);
+  const [status, setStatus] = useState({ type: 'idle', message: '' });
 
-    // Reset the button back to normal after 4 seconds
-    setTimeout(() => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    setSubmitted(true);
+    setStatus({ type: 'idle', message: '' });
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setStatus({ type: 'success', message: 'Message sent successfully. Thank you!' });
+        form.reset();
+      } else {
+        setStatus({
+          type: 'error',
+          message: result.message || 'Could not send message. Please try again later.',
+        });
+      }
+    } catch (error) {
+      setStatus({ type: 'error', message: 'Network error, please try again later.' });
+    } finally {
       setSubmitted(false);
-    }, 4000);
+    }
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 px-6 md:px-20 bg-gradient-to-b from-background to-[#0d0d0d] relative overflow-hidden">
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 md:gap-24 items-start">
+    <section id="contact" className="py-16 md:py-32 px-4 md:px-20 bg-gradient-to-b from-background to-[#0d0d0d] relative overflow-hidden">
+      <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 md:gap-16 items-start">
         
         {/* Left: Info */}
-        <div className="flex flex-col gap-10 md:gap-14 relative lg:sticky lg:top-32 text-left">
+        <div className="flex flex-col gap-6 md:gap-12 relative lg:sticky lg:top-32 text-left">
           <div className="overflow-hidden">
             <motion.span 
               initial={{ y: 20, opacity: 0 }}
@@ -72,17 +89,17 @@ export default function Contact() {
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-5xl sm:text-7xl md:text-8xl font-display uppercase tracking-tight text-white leading-[0.9] mb-8"
+              className="text-4xl sm:text-5xl md:text-8xl font-display uppercase tracking-tight text-white leading-[0.95] mb-5"
             >
-              Let's Create <br /><span className="text-accent italic text-[10vw] sm:text-[8vw] md:text-[6vw]">Together</span>
+              Let's Create <br /><span className="text-accent italic text-[8vw] sm:text-[6vw] md:text-[6vw]">Together</span>
             </motion.h2>
-            <p className="text-gray-500 font-sans text-base md:text-lg max-w-sm italic opacity-70 border-l border-accent/30 pl-6">
+            <p className="hidden sm:block text-gray-500 font-sans text-sm md:text-lg max-w-sm italic opacity-70 border-l border-accent/30 pl-6">
               "Open to internships, collaborations, and exciting projects. Let's build something exceptional."
             </p>
           </div>
 
           {/* Contact Details */}
-          <div className="flex flex-col gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-5">
             {contactInfo.map((info, idx) => (
               <motion.div
                 key={info.label}
@@ -90,14 +107,14 @@ export default function Contact() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: idx * 0.1, duration: 0.6 }}
                 viewport={{ once: true }}
-                className="flex items-center gap-5 group"
+                className="flex items-center gap-3 group"
               >
-                <div className="w-px h-10 md:h-12 bg-white/10 group-hover:bg-accent transition-colors duration-300"></div>
-                <div className="p-2.5 bg-white/5 rounded-xl group-hover:bg-accent/10 transition-colors">
+                <div className="w-px h-10 bg-white/10 group-hover:bg-accent transition-colors duration-300"></div>
+                <div className="p-2 bg-white/5 rounded-xl group-hover:bg-accent/10 transition-colors">
                   {info.icon}
                 </div>
                 <div className="flex flex-col text-left">
-                  <span className="text-[9px] uppercase tracking-widest text-gray-500 font-sans font-bold mb-1">{info.label}</span>
+                  <span className="text-[8px] uppercase tracking-widest text-gray-500 font-sans font-bold mb-1">{info.label}</span>
                   {info.href ? (
                     <a
                       href={info.href}
@@ -121,16 +138,12 @@ export default function Contact() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
-          className="w-full pt-10 lg:pt-0"
+          className="w-full pt-8 lg:pt-0"
         >
-          {/* Hidden iframe to silently capture FormSubmit's redirect page without changing user's page */}
-          <iframe name="hidden_iframe" id="hidden_iframe" style={{ display: 'none' }}></iframe>
-          
-          <form action="https://api.web3forms.com/submit" method="POST" target="hidden_iframe" onSubmit={handleSubmit} className="flex flex-col gap-10 md:gap-12 text-left">
-            {/* Get your free access key from https://web3forms.com/ by entering your email */}
+          <form onSubmit={handleSubmit} className="flex flex-col gap-8 md:gap-10 text-left max-w-xl mx-auto">
             <input type="hidden" name="access_key" value="0e37f649-0a3c-49f5-9a06-32617056085b" />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-              <div className="flex flex-col gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+              <div className="flex flex-col gap-3">
                 <label htmlFor="name" className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/60 font-sans font-black">Name</label>
                 <input 
                   id="name"
@@ -138,10 +151,10 @@ export default function Contact() {
                   type="text" 
                   placeholder="Your Name" 
                   required
-                  className="bg-transparent border-b border-white/30 py-4 md:py-5 font-sans text-white focus:border-accent outline-none transition-all placeholder:text-white/40 text-base md:text-xl font-light"
+                  className="bg-transparent border-b border-white/30 py-3 md:py-4 font-sans text-white focus:border-accent outline-none transition-all placeholder:text-white/40 text-base md:text-xl font-light"
                 />
               </div>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-3">
                 <label htmlFor="email" className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/60 font-sans font-black">Email</label>
                 <input 
                   id="email"
@@ -149,23 +162,23 @@ export default function Contact() {
                   type="email" 
                   placeholder="hello@example.com" 
                   required
-                  className="bg-transparent border-b border-white/30 py-4 md:py-5 font-sans text-white focus:border-accent outline-none transition-all placeholder:text-white/40 text-base md:text-xl font-light"
+                  className="bg-transparent border-b border-white/30 py-3 md:py-4 font-sans text-white focus:border-accent outline-none transition-all placeholder:text-white/40 text-base md:text-xl font-light"
                 />
               </div>
             </div>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               <label htmlFor="subject" className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/60 font-sans font-black">Subject</label>
               <input 
                 id="subject"
                 name="subject"
                 type="text" 
                 placeholder="Internship Opportunity / Collaboration..." 
-                className="bg-transparent border-b border-white/30 py-4 md:py-5 font-sans text-white focus:border-accent outline-none transition-all placeholder:text-white/40 text-base md:text-xl font-light"
+                className="bg-transparent border-b border-white/30 py-3 md:py-4 font-sans text-white focus:border-accent outline-none transition-all placeholder:text-white/40 text-base md:text-xl font-light"
               />
             </div>
             
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               <label htmlFor="message" className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-white/60 font-sans font-black">Message</label>
               <textarea 
                 id="message"
@@ -183,10 +196,11 @@ export default function Contact() {
 
             <button 
               type="submit"
-              className="self-start group flex items-center gap-6 px-12 py-6 md:px-16 md:py-7 rounded-full font-sans font-black uppercase tracking-[0.4em] text-[9px] md:text-[10px] bg-white text-black hover:bg-accent transition-all duration-700 shadow-2xl relative overflow-hidden"
+              disabled={submitted}
+              className="self-start group flex items-center gap-4 px-10 py-4 md:px-16 md:py-6 rounded-full font-sans font-black uppercase tracking-[0.4em] text-[9px] md:text-[10px] bg-white text-black hover:bg-accent transition-all duration-700 shadow-2xl relative overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {submitted ? (
-                <span className="text-black">Message Sent! ✓</span>
+                <span className="text-black">Sending...</span>
               ) : (
                 <>
                   <span className="relative z-10">Send Message</span>
@@ -194,6 +208,11 @@ export default function Contact() {
                 </>
               )}
             </button>
+            {status.message && (
+              <p className={`text-sm ${status.type === 'success' ? 'text-emerald-400' : 'text-rose-400'} font-sans mt-1`}>
+                {status.message}
+              </p>
+            )}
           </form>
         </motion.div>
 

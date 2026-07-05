@@ -54,24 +54,24 @@ export default function Certificates() {
   const [previewCert, setPreviewCert] = useState(null);
 
   return (
-    <section id="certificates" className="py-24 md:py-32 px-6 md:px-20 bg-surface/20 relative border-t border-white/5 overflow-hidden">
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section id="certificates" className="py-16 md:py-28 px-4 md:px-20 bg-surface/20 relative border-t border-white/5 overflow-hidden">
+      <div className="max-w-6xl mx-auto relative z-10">
 
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-20 gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-20 gap-5 md:gap-8">
           <div className="text-left">
-            <span className="font-sans text-[10px] md:text-xs text-accent uppercase tracking-[0.4em] font-black mb-4 block">Achievements</span>
+            <span className="font-sans text-[10px] md:text-xs text-accent uppercase tracking-[0.4em] font-black mb-3 block">Achievements</span>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-display uppercase tracking-wider">
               Certifi<span className="text-accent underline decoration-white/10 underline-offset-8">cations</span>
             </h2>
           </div>
-          <span className="font-sans text-[10px] md:text-sm text-gray-500 uppercase tracking-widest bg-background/50 px-6 py-3 rounded-full border border-white/5 whitespace-nowrap">
+          <span className="font-sans text-[10px] md:text-sm text-gray-500 uppercase tracking-widest bg-background/50 px-4 py-2 rounded-full border border-white/5 whitespace-nowrap">
             (04) Certificates
           </span>
         </div>
 
         {/* Certificate Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-2 md:gap-8"> 
           {certificates.map((cert, idx) => (
             <motion.div
               key={cert.id}
@@ -79,18 +79,18 @@ export default function Certificates() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.15, duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
               viewport={{ once: true }}
-              className={`group relative p-8 md:p-10 border ${cert.border} bg-gradient-to-br ${cert.color} bg-background/50 backdrop-blur-sm rounded-[2rem] overflow-hidden`}
+              className={`group relative p-5 md:p-10 border ${cert.border} bg-gradient-to-br ${cert.color} bg-background/50 backdrop-blur-sm rounded-[2rem] overflow-hidden`}
             >
               {/* Glow on hover */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-white/[0.02] rounded-[2rem]" />
 
               <div className="flex flex-col gap-6 relative z-10">
                 {/* Icon + Meta */}
-                <div className="flex items-start justify-between gap-4">
-                  <div className="p-4 bg-white/5 rounded-2xl group-hover:bg-accent/10 transition-colors duration-500">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="p-3 bg-white/5 rounded-2xl group-hover:bg-accent/10 transition-colors duration-500">
                     {cert.icon}
                   </div>
-                  <span className="font-sans text-[9px] text-white/30 uppercase tracking-widest font-bold border border-white/10 px-3 py-1.5 rounded-full">
+                  <span className="font-sans text-[9px] text-white/30 uppercase tracking-widest font-bold border border-white/10 px-2.5 py-1 rounded-full">
                     {cert.date}
                   </span>
                 </div>
@@ -98,17 +98,17 @@ export default function Certificates() {
                 {/* Title & Issuer */}
                 <div className="flex flex-col gap-2 text-left">
                   <span className="font-sans text-[10px] text-accent uppercase tracking-widest font-black">{cert.issuer}</span>
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-display font-medium uppercase text-white leading-tight">
+                  <h3 className="text-base sm:text-lg md:text-2xl font-display font-medium uppercase text-white leading-tight">
                     {cert.title}
                   </h3>
-                  <p className="text-gray-500 font-sans text-xs md:text-sm leading-relaxed mt-1">{cert.description}</p>
+                  <p className="hidden sm:block text-gray-500 font-sans text-xs md:text-sm leading-relaxed mt-1">{cert.description}</p>
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex flex-wrap gap-3 mt-2">
+                <div className="flex flex-wrap gap-2 mt-2">
                   <button
                     onClick={() => setPreviewCert(cert)}
-                    className="flex items-center gap-2 font-sans font-bold text-[10px] uppercase tracking-widest bg-accent/10 border border-accent/30 text-accent hover:bg-accent hover:text-black transition-all duration-500 px-5 py-3 rounded-full"
+                    className="flex items-center gap-2 font-sans font-bold text-[10px] uppercase tracking-widest bg-accent/10 border border-accent/30 text-accent hover:bg-accent hover:text-black transition-all duration-500 px-4 py-2 rounded-full"
                   >
                     <Eye className="w-3.5 h-3.5" />
                     View Certificate
